@@ -191,9 +191,9 @@ private:
             
             // process received message
             if (server_config.output_messages) {
-                string msg(buffer);
-                msg += '\0';
-                cout << "Mensaje: " << buffer << endl;
+                string msg(buffer, bytes_received);
+                msg[bytes_received] = '\0';
+                cout << "Mensaje: " << msg << endl;
             }
             
             // send echo to ALL clients
