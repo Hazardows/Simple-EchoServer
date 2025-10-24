@@ -5,6 +5,7 @@
 #include <thread>
 #include <chrono>
 #include <fstream>
+#include <sstream>
 
 using namespace std;
 
@@ -151,38 +152,52 @@ void loadConfig(string filename, ClientConfig& config) {
     config.server_ip = "127.0.0.1";
     config.port = 8080;
 
-    while (cin >> input) {
+    while (getline(cin, input)) {
+        istringstream line_stream(input);
+        string key;
+
+        // skip empty lines
+        if (input.empty()) {
+            goto skip;
+        }
+        
+        // read the first word from the line
+        if (!(line_stream >> key)) {
+            // skip lines with only whitespace
+            goto skip;
+        }
+
         // ignore this line if it is a comment.
-        if (input[0] == '#') {
-            getline(cin, input);
-            goto next;
+        if (key[0] == '#') {
+            goto skip;
         }
 
         // check for settings and errors
-        if (input == "port:") {
+        if (key == "port:") {
             u_short port;
-            cin >> port;
+            if (!(line_stream >> port)) {
+                goto error;
+            }
             
             // todo check if this is a valid port
             config.port = port;
-
-            goto next;
+            goto skip;
         }
-        else if (input == "server_ip:") {
+        else if (key == "server_ip:") {
             string val;
-            cin >> val;
+            if (!(line_stream >> val)) {
+                goto error;
+            }
 
             // todo: check if this is a valid server ip
             config.server_ip = val;
-
-            goto next;
+            goto skip;
         }
 
-
         error:
-        cout << "Error parsing file at line: " << line << endl;
+        cerr << "Error de lectura en la linea: " << line << endl;
         
-        next:
+        skip:
         line++;
     }
 }
