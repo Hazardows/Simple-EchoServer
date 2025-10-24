@@ -13,7 +13,7 @@ A lightweight, multi-client echo server implementation in C++ for Windows.
 Create server.cfg in the same directory as echo_server.exe to customize server settings. If no configuration file is found, default values will be used.
 
 ### Client Configuration
-Create test_client.cfg in the same directory as test_client.exe to customize client behavior. If no configuration file is found, default values will be used.
+Create client.cfg in the same directory as test_client.exe to customize client behavior. If no configuration file is found, default values will be used.
 
 ### Sample Configurations
 Check the sample configs/ directory for example configuration files that you can copy and modify:
