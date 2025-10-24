@@ -18,7 +18,7 @@ Create test_client.cfg in the same directory as test_client.exe to customize cli
 ### Sample Configurations
 Check the sample_configs/ directory for example configuration files that you can copy and modify:
 - server.cfg - Example server configuration
-- test_client.cfg - Example client configuration
+- client.cfg - Example client configuration
 
 ## Compilation
 To compile both the echo server and test client, run the build.bat script.
